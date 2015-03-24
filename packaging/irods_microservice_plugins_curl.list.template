@@ -13,11 +13,9 @@
 
 %if DEB
 %requires libc6
-%requires libcurl3
 %endif
 
 %if RPM
-%requires curl-devel
 %endif
 
 %if ARCH
@@ -108,7 +106,6 @@ END_POSTREMOVE
 # Full File Listing
 # =-=-=-=-=-=-=-
 f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/iRODS/clients/icommands/test/rules3.0/ rules/*
-f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiCurlGetObj/*.so
-f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiCurlGetStr/*.so
-f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiCurlPost/*.so
-f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/tests/pydevtest/test_irods_microservice_plugins_curl.py packaging/test_irods_microservice_plugins_curl.py
+f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiReadRule/*.so
+f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiWriteRule/*.so
+f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/tests/pydevtest/test_irods_microservice_plugins_rule.py packaging/test_irods_microservice_plugins_rule.py

@@ -1,4 +1,2 @@
-irods_microservice_plugins_curl
+irods_rule_admin_microservices
 ===============================
-
-Port of the URL module in community iRODS
