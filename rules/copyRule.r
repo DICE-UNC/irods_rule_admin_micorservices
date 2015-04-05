@@ -11,5 +11,17 @@ copy(*rb, *r, *t) {
     }
 }
 
+testRule1 {
+    msiGetAllResources(*list);
+    foreach(*l in split(*list, '\n')) {
+        writeLine('stdout', '[*l]');
+    }
+}
+
+testRule2 {
+    msiRuleSetExists('core', *e); 
+    writeLine('stdout', *e);
+}
+
 INPUT *ruleBaseName="core",*targets=list("A", "B")
 OUTPUT ruleExecOut

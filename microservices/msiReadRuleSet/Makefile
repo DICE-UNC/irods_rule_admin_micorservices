@@ -2,9 +2,9 @@ GCC = g++
 
 INC=-I/usr/include/irods/ -I/usr/include/irods/boost/
 
-all: libmsiWriteRule
+all: libmsiReadRuleSet
 
-libmsiWriteRule:
+libmsiReadRuleSet:
 	${GCC} ${INC} -DRODS_SERVER -fPIC -shared -g -Wno-deprecated -o $@.so $@.cpp /usr/lib/irods/libirods_client.a
 
 clean:

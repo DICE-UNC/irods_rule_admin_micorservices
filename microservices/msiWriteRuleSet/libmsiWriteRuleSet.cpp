@@ -16,23 +16,21 @@
 #include "microservice.hpp"
 
 MICROSERVICE_BEGIN(
-    msiWriteRule,
-    STR, ruleBaseName, INPUT
-    STR, rule, OUTPUT NO_ALLOC
+    msiWriteRuleSet,
+    STR, ruleBaseName, INPUT,
+    STR, rule, INPUT
 )
 
     std::string cfg_file, fn( ruleBaseName );
-    fn += ".re"
-    irods::error ret = irods::get_full_path_for_config_file( fn, cfg_file );
-    if ( !ret.ok() ) {
-        RETURN(ret.code());
-    }
+    fn += ".re";
+    cfg_file = "/etc/irods/" + fn;
 
-    if (std::string(rei->rsComm.clientUser.userType) != "rodsadmin") {
+    if (rei->rsComm->clientUser.authInfo.authFlag < LOCAL_PRIV_USER_AUTH) {
         RETURN(CAT_INSUFFICIENT_PRIVILEGE_LEVEL);
     }
-    std::ofstream output("filename.txt");
+
+    std::ofstream output(cfg_file.c_str());
 		output << rule;
-    return 0;
+    RETURN(0);
 
 MICROSERVICE_END
