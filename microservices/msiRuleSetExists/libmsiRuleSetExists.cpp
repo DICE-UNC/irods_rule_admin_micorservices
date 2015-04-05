@@ -26,7 +26,8 @@ MICROSERVICE_BEGIN(
     fn += ".re";
     irods::error ret = irods::get_full_path_for_config_file( fn, cfg_file );
     if ( !ret.ok() ) {
-        RETURN(ret.code());
+        ext = ret.code();
+        RETURN(0);
     }
 
     if (rei->rsComm->clientUser.authInfo.authFlag < LOCAL_PRIV_USER_AUTH) {

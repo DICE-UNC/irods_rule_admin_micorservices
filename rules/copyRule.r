@@ -1,27 +1,31 @@
+# the copy.re must be available on all servers
+# the rule admin microservices must also be available on all servers
 copyRule {
-    readRule(*ruleBaseName, *rule)
-    foreach(*target in *targets) {
-        copy(*ruleBaseName, *rule, *target)
+    remoteDeployRuleSets(
+        *ruleBaseName,
+        *targets
+    );
+}
+
+remoteDeployRuleSets(*rbs, *addrs) {
+    *out = "";
+    foreach(*addr in *addrs) {
+        foreach(*rb in *rbs) {
+            *err = errorcode(remoteWriteRuleSet(*rb, *addr));
+            *out = *out ++ "*rb -> *addr " ++ (if *err != 0 then "failure" else "success") ++ "\n";
+        }
+    }
+    writeLine("stdout", *out);
+}
+
+remoteWriteRuleSet(*rb, *addr) {
+    msiReadRuleSet(*rb, *rule);
+    msiChksumRuleSet(*rb, *chksum);
+    remote(*addr, "") {
+        writeRuleSet(*rb, *rule, *chksum);
     }
 }
 
-copy(*rb, *r, *t) {
-    remote(*t, "") {
-        writeRule(*rb, *r)
-    }
-}
 
-testRule1 {
-    msiGetAllResources(*list);
-    foreach(*l in split(*list, '\n')) {
-        writeLine('stdout', '[*l]');
-    }
-}
-
-testRule2 {
-    msiRuleSetExists('core', *e); 
-    writeLine('stdout', *e);
-}
-
-INPUT *ruleBaseName="core",*targets=list("A", "B")
+INPUT *ruleBaseName=list("core"),*targets=list("localhost")
 OUTPUT ruleExecOut
