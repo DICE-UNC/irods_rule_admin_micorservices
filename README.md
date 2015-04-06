@@ -1,6 +1,11 @@
 irods_rule_admin_microservices
 ===============================
 
+prerequisites
+----------
+Linux only
+md5sum command is used to computer chksum
+
 build
 ----------
 /package/build.sh
