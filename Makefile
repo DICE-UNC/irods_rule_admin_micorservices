@@ -17,5 +17,10 @@ $(LIBS):
 	@$(MAKE) -C $@;
 
 clean:
-	@$(MAKE) -C $(MSI_READ_RULE) clean;
-	@$(MAKE) -C $(MSI_WRITE_RULE) clean;
+	@$(MAKE) -C $(MSI_READ_RULE_SET) clean;
+	@$(MAKE) -C $(MSI_WRITE_RULE_SET) clean;
+	@$(MAKE) -C $(MSI_RULE_SET_EXISTS) clean;
+	@$(MAKE) -C $(MSI_CHKSUM_RULE_SET) clean;
+	@$(MAKE) -C $(MSI_MV_RULE_SET) clean;
+	@$(MAKE) -C $(MSI_RM_RULE_SET) clean;
+	@$(MAKE) -C $(MSI_GET_ALL_RESOURCES) clean;
